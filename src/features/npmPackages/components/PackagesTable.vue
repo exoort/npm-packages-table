@@ -1,18 +1,13 @@
 <script setup lang="ts">
-
-import SearchForm from '@/shared/structures/SearchForm.vue';
-import { computed, ref, watch } from 'vue';
-import { useNpmApi } from '@/features/npmPackages/composables/useNpmApi';
-import { useQuery } from 'vue-query';
-import { useRoute } from 'vue-router';
-import PaginatedTable from '@/shared/structures/PaginatedTable/PaginatedTable.vue';
+import { computed } from 'vue';
 import BaseTable from '@/shared/ui/BaseTable.vue';
-import type { INpmPackage } from '@/features/npmPackages/types/INpmPackage';
-import type { IPaginatedTableItemSlot, IPaginatedTableSlot } from '@/shared/structures/PaginatedTable/types';
-import { usePaginatedTable } from '@/shared/structures/PaginatedTable/usePaginatedTable';
-import { usePackageDetailsDialog } from '@/features/npmPackages/components/PackageDetailsDialog/usePackageDetailsDialog';
+import type { IPaginatedTableItemSlot, IPaginatedTableSlot } from '@/shared/structures/PaginatedTable';
+import { PaginatedTable, usePaginatedTable } from '@/shared/structures/PaginatedTable';
+import type { INpmPackage } from '../types/INpmPackage';
+import { usePackageDetailsDialog } from './PackageDetailsDialog/usePackageDetailsDialog';
+import { useNpmApi } from '../composables/useNpmApi';
 
-const fetchFn = useNpmApi().getPackages;
+const fetchFn = computed(() => useNpmApi().getPackages);
 type TableItems = IPaginatedTableSlot<INpmPackage>;
 
 function itemKeyGenerator(item: INpmPackage): string {

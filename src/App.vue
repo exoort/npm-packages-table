@@ -1,16 +1,15 @@
 <script setup lang="ts">
 import PageLoader from '@/shared/structures/PageLoader.vue';
+import DefaultLayout from '@/shared/layouts/DefaultLayout.vue';
 
 </script>
 
 <template>
   <Suspense>
     <template #default>
-      <div>
+      <DefaultLayout>
         <RouterView />
-
-        <div id="#default-modal-container" />
-      </div>
+      </DefaultLayout>
     </template>
 
     <template #fallback>

@@ -5,7 +5,7 @@ import type {
   IUsePackageDetailsDialogProps,
 } from './types';
 
-defineProps<IUsePackageDetailsDialogProps>();
+const { initialValue, npmPackage } = defineProps<IUsePackageDetailsDialogProps>();
 
 </script>
 
@@ -18,7 +18,3 @@ defineProps<IUsePackageDetailsDialogProps>();
     </pre>
   </BaseModal>
 </template>
-
-<style scoped>
-
-</style>

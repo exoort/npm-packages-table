@@ -1,13 +1,10 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 
-const props = withDefaults(defineProps<{
+const { initialValue = false } = defineProps<{
   initialValue?: boolean,
-}>(), {
-  initialValue: false,
-});
-
-const isShown = ref(props.initialValue);
+}>();
+const isShown = ref(initialValue);
 
 function setIsShown(value) {
   isShown.value = value;

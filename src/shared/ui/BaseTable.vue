@@ -1,22 +1,22 @@
 <script setup lang="ts">
 type KeyFn = (item: unknown) => string;
 
-const props = withDefaults(defineProps<{
+const {
+  headers = () => [],
+  items = () => [],
+  itemKey = 'id',
+} = defineProps<{
   headers?: Record<string, any>[],
   items: unknown[],
   itemKey?: string | KeyFn,
-}>(), {
-  headers: () => [],
-  items: () => [],
-  itemKey: 'id',
-});
+}>();
 
 const emit = defineEmits<{
   (e: 'rowClick', item: unknown): void,
 }>();
 
 function getItemKey(item: unknown): string {
-  const key = typeof props.itemKey === 'function' ? props.itemKey(item) : item[props.itemKey];
+  const key = typeof itemKey === 'function' ? itemKey(item) : item[itemKey];
 
   return String(key);
 }

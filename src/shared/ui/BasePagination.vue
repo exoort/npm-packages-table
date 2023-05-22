@@ -1,13 +1,11 @@
 <script setup lang="ts">
-import { computed } from 'vue';
-
-const props = withDefaults(defineProps<{
+const {
+  total = 1,
+  modelValue,
+} = defineProps<{
   total?: number,
   modelValue?: number,
-}>(), {
-  total: 1,
-  modelValue: undefined,
-});
+}>();
 
 const emit = defineEmits<{
   (e: 'update:modelValue', value: unknown): void,
@@ -24,6 +22,7 @@ function updateModelValue(page: number): void {
       <li v-if="modelValue !== 1">
         <button
           @click="updateModelValue(modelValue - 1)"
+          type="button"
           class="px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
         >
           Previous
@@ -42,6 +41,7 @@ function updateModelValue(page: number): void {
       <li v-if="modelValue !== total">
         <button
           @click.prevent="updateModelValue(modelValue + 1)"
+          type="button"
           class="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
         >
           Next

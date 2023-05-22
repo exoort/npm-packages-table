@@ -4,17 +4,15 @@ import BaseInput from '@/shared/ui/BaseInput.vue';
 import { ref } from 'vue';
 import BaseButton from '@/shared/ui/BaseButton.vue';
 
-const props = withDefaults(defineProps<{
+const { initialValue = '' } = defineProps<{
   initialValue?: string,
-}>(), {
-  initialValue: '',
-});
+}>();
 
 const emit = defineEmits<{
   (e: 'search', value: string): void,
 }>();
 
-const searchQuery = ref(props.initialValue as string);
+const searchQuery = ref(initialValue as string);
 
 function onSubmit() {
   emit('search', searchQuery.value);

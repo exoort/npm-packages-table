@@ -113,6 +113,8 @@ module.exports = {
       {
         "allowSingleExtends": true
       }
-    ]
+    ],
+
+    'vue/no-setup-props-destructure': 'off'
   }
 }

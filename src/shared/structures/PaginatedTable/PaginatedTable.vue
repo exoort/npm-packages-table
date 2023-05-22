@@ -2,13 +2,13 @@
 
 import SearchForm from '@/shared/structures/SearchForm.vue';
 import { computed, ref, watch } from 'vue';
-import { useQuery, useQueryClient } from '@tanstack/vue-query';
+import { useQuery } from '@tanstack/vue-query';
 import { useRoute, useRouter } from 'vue-router';
 import type { IPaginatedResponse } from '@/shared/types/IPaginatedResponse';
 import BasePagination from '@/shared/ui/BasePagination.vue';
 import PageLoader from '@/App.vue';
 
-const props = defineProps<{
+const { fetchFn } = defineProps<{
   fetchFn: (...args) => Promise<IPaginatedResponse>,
 }>();
 
@@ -21,7 +21,7 @@ const {
   data, refetch, isRefetching,
 } = useQuery<IPaginatedResponse>(
   {
-    queryFn: () => props.fetchFn({
+    queryFn: () => fetchFn({
       page: currentPage.value,
       query: searchQuery.value,
       perPage: 10,
@@ -64,8 +64,6 @@ const route = useRoute();
 const query = computed(() => route.query as QueryParams);
 
 watch(query, async (params) => {
-  console.log({ params });
-
   const { search, page } = params || {};
 
   currentPage.value = Number(page) || 1;
@@ -83,7 +81,6 @@ watch(query, async (params) => {
     v-else-if="data"
     class="mx-auto max-w-screen-xl px-4 lg:px-12"
   >
-    <!-- Start coding here -->
     <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
       <SearchForm
         class="p-5 text-center"
