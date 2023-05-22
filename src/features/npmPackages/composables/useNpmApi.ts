@@ -7,7 +7,7 @@ export function useNpmApi() {
     perPage = 100,
     query = '',
   }): Promise<IPaginatedResponse<INpmPackage>> {
-    const from = page * perPage;
+    const from = page !== -1 ? (page - 1) * perPage : page;
 
     const response = await fetch(
       `https://registry.npmjs.org/-/v1/search?text=${query}&from=${from}&size=${perPage}`,
